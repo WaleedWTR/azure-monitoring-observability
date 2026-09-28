@@ -1,0 +1,11 @@
+timestamp,service,requests,errors,latency_ms,available
+2026-09-20T09:00:00Z,customer-api,1000,2,120,true
+2026-09-20T09:05:00Z,customer-api,980,3,128,true
+2026-09-20T09:10:00Z,customer-api,1025,4,132,true
+2026-09-20T09:15:00Z,customer-api,1100,8,180,true
+2026-09-20T09:20:00Z,customer-api,1075,60,950,false
+2026-09-20T09:25:00Z,customer-api,1010,7,210,true
+2026-09-20T09:30:00Z,customer-api,995,3,130,true
+2026-09-20T09:35:00Z,customer-api,1040,2,125,true
+2026-09-20T09:40:00Z,customer-api,1085,4,140,true
+2026-09-20T09:45:00Z,customer-api,1030,3,135,true
