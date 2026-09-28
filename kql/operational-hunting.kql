@@ -1,0 +1,24 @@
+// Azure administrative changes by operation
+AzureActivity
+| where TimeGenerated > ago(24h)
+| summarize Events=count(),
+    Callers=dcount(Caller),
+    CallerList=make_set(Caller, 20)
+    by OperationNameValue, ActivityStatusValue
+| order by Events desc;
+
+// Failed Azure administrative operations
+AzureActivity
+| where TimeGenerated > ago(24h)
+| where ActivityStatusValue !in~ ("Success", "Succeeded")
+| project TimeGenerated, Caller, OperationNameValue,
+          ResourceGroup, ResourceId, ActivityStatusValue
+| order by TimeGenerated desc;
+
+// Heartbeat gaps by computer where Heartbeat telemetry exists
+Heartbeat
+| where TimeGenerated > ago(1h)
+| summarize LastHeartbeat=max(TimeGenerated) by Computer
+| extend MinutesSinceHeartbeat=datetime_diff("minute", now(), LastHeartbeat)
+| where MinutesSinceHeartbeat > 10
+| order by MinutesSinceHeartbeat desc;
